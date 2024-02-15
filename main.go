@@ -2,11 +2,16 @@ package main
 
 import (
 	"fmt"
+	"slices"
 	"strings"
 )
 
 func addCourses(slice []string, courses []string) []string {
 	return append(slice, courses...)
+}
+
+func deleteCourses(slice []string, i int, j int) []string {
+	return slices.Delete[[]string](slice, i, j)
 }
 
 func main() {
@@ -23,12 +28,15 @@ func main() {
 		dept:    "Computer",
 		faculty: "Engineering",
 		level:   300,
-		courses: []map[string][]string{{"Computer Courses": {"Software Development Techniques"}}, {"Electrical Courses": {"Electrical Devices", "Electrical Machines"}}},
+		courses: []map[string][]string{{"Computer Courses": {"Software Development Techniques"}}, {"Electrical Courses": {"Electrical Devices", "Electrical Machines", "Gibberish", "I love you Daddy"}}},
 	}
 
 	students.courses[0]["Computer Courses"] = addCourses(students.courses[0]["Computer Courses"], []string{"Hello World", "Lorem Ipsum", "Faithful King"})
 
+	students.courses[1]["Electrical Courses"] = deleteCourses(students.courses[1]["Electrical Courses"], 1, 2)
+
 	fmt.Println("courses", students.courses[0]["Computer Courses"])
+	fmt.Println("courses", students.courses[1]["Electrical Courses"])
 
 	firstName := strings.Split(students.name, " ")[0]
 
