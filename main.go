@@ -14,6 +14,10 @@ func deleteCourses(slice []string, i int, j int) []string {
 	return slices.Delete[[]string](slice, i, j)
 }
 
+func sayHello(text string, cb func(string)) {
+	cb(text)
+}
+
 func main() {
 	type Students struct {
 		name    string
@@ -37,6 +41,12 @@ func main() {
 
 	fmt.Println("courses", students.courses[0]["Computer Courses"])
 	fmt.Println("courses", students.courses[1]["Electrical Courses"])
+
+	text := "Hello World"
+
+	sayHello(text, func(text string) {
+		fmt.Println(text)
+	})
 
 	firstName := strings.Split(students.name, " ")[0]
 
